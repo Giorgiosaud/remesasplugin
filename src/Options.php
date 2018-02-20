@@ -144,13 +144,7 @@ class Options
     }
 
 
-    public function sanitize_general_settings($input)
-    {
-        $new_input = array();
-        if( isset( $input['tasa'] ) )
-            $new_input['tasa'] = absint( $input['tasa'] );
-        return $new_input;
-    }
+
 
     /**
      * Print the Section text
@@ -174,10 +168,15 @@ class Options
         var_dump($this->options);
         printf(
             '<input type="text" id="tasa" name="tasa_remesas_wp_plugin_general[tasa]" value="%s" />',
-            isset($this->options['tasa']) ? esc_attr($this->options['tasa']) : ''
+            isset($this->options['tasa']) ? esc_attr($this->options['tasa'])/100 : ''
         );
-
-
+    }
+    public function sanitize_general_settings($input)
+    {
+        $new_input = array();
+        if( isset( $input['tasa'] ) )
+            $new_input['tasa'] = $input['tasa']*100;
+        return $new_input;
     }
 
     /**
