@@ -32,4 +32,3 @@ function tasaRemesasPlugin()
     return Initializers::getInstance();
 }
 $GLOBALS['tasaremesas'] = tasaRemesasPlugin();
-tasaR
