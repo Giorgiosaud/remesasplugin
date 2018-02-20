@@ -173,7 +173,7 @@ class Options
     {
         var_dump($this->options);
         printf(
-            '<input type="number" id="tasa" name="tasa_remesas_wp_plugin_general[tasa]" value="%i" />',
+            '<input type="number" id="tasa" name="tasa_remesas_wp_plugin_general[tasa]" value="%s" />',
             isset($this->options['tasa']) ? esc_attr($this->options['tasa']) : ''
         );
 
