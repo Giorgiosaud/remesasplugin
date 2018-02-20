@@ -1,58 +1,29 @@
 <?php 
 namespace giorgiosaud\tasaRemesas\shortcodes;
 use giorgiosaud\tasaRemesas\Singleton;
+
+/**
+ * @property  tasa
+ */
 class tasaRemesasShortcode extends Singleton{
-	protected $posts=array();
 	protected $view;
-	public function __construct()
+    private $tasa;
+
+    public function __construct()
 	{
 		add_shortcode('tasaRemesas',array($this,'execute'));
 	}
 	public function execute($atts){
 		$atts = shortcode_atts(
 			array(
-				'post_type' => 'paquetes',
-				'category' => 'activo',
-				'qty'=>'10',
-				'id'=>'identificador'
+				'class'=>'tasa'
 			), $atts, 'slickwp' );
-		$this->getPosts($atts);
-		$this->prepareView($atts['id'],$atts['category']);
-
-		
+        $options=get_option('tasa_remesas_wp_plugin_general');
+        $this->tasa=$options['tasa'];
 		return $this->view;
 	}
 	protected function prepareView($id,$cat){
-		$html="<div class='carousel $cat'  id='$id'>";
-		foreach ($this->posts as $post) {
-			$ref=$post['link'];
-			$html.='<div class="carousel_slide">';
-				$html.='<div class="carousel_container">';
-					$html.="<a href='$ref'>";
-						$html.='<div class="carousel_image">';
-							$html.=$post['image'];
-						$html.='</div>';
-						$html.='<div class="carousel_text">';
-							$html.='<div class="carousel_title">';
-								$html.=$post['big_title'];
-							$html.='</div>';
-							$html.='<div class="carousel_subTitle">';
-								$html.=$post['short_description'];
-							$html.='</div>';
-						$html.='</div>';
-					$html.='</a>';
-				$html.='</div>';
-			$html.='</div>';
-
-		}
-		$html.='</div>';
-		$html.='<script >';
-		$html.='jQuery(document).ready(function($) {';
-
-		$html.="$('#$id').slick({infinite:true,dots:false,prevArrow:\"<button type='button' class='slickwp-prev'>Previous</button>\",nextArrow:\"<button type='button' class='slickwp-next'>Next</button>\"});";
-	
-		$html.='});';
-		$html.='</script>';
+		
 		$this->view=$html;
 		// return;
 	}
