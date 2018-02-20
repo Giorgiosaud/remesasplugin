@@ -24,16 +24,22 @@ class tasaRemesasShortcode extends Singleton{
 		return $this->view;
 	}
 	protected function prepareView(){
-        $tasa=$this->tasa/100;
+        $tasa=number_format($this->tasa/100,2,',','.');
         $html="<h2 style='text-align: center;'>Tasa $tasa</h2>";
-        $html.="<p style='text-align: center;'>20.000$={$tasa*20000}</p>";
-        $html.='<p style="text-align: center;">40.000$=123bs</p>';
-        $html.='<p style="text-align: center;">50.000$=123bs</p>';
-        $html.='<p style="text-align: center;">100.000$=123bs</p>';
-        $html.='<p style="text-align: center;">200.000$=123bs</p>';
-        $html.='<p style="text-align: center;">500.000$=123bs</p>';
-        $html.='<p style="text-align: center;">1.000.000$=123bs</p>';
-		$this->view=$html;
+        $tasa=number_format($this->tasa/100*20000,2,',','.');
+        $html.="<p style='text-align: center;'>20.000$=$tasa</p>";
+        $tasa=number_format($this->tasa/100*40000,2,',','.');
+        $html.="<p style='text-align: center;'>40.000$=$tasa</p>";
+        $tasa=number_format($this->tasa/100*50000,2,',','.');
+        $html.="<p style='text-align: center;'>50.000$=$tasa</p>";
+        $tasa=number_format($this->tasa/100*100000,2,',','.');
+        $html.="<p style='text-align: center;'>100.000$=$tasa</p>";
+        $tasa=number_format($this->tasa/100*500000,2,',','.');
+        $html.="<p style='text-align: center;'>500.000$=$tasa</p>";
+        $tasa=number_format($this->tasa/100*1000000,2,',','.');
+        $html.="<p style='text-align: center;'>1.000.000$=$tasa</p>";
+
+        $this->view=$html;
 	}
 }
 
