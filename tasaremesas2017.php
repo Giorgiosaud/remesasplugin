@@ -11,6 +11,9 @@ License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  wporg
 Domain Path:  /languages
 */
+
+use giorgiosaud\tasaRemesas\Initializers;
+
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 if (!defined('TASAREMESAS_FILE')) {
     define('TASAREMESAS_FILE', __FILE__);
@@ -24,8 +27,9 @@ if ( file_exists( dirname( __FILE__ ) . '/cmb2/init.php' ) ) {
 	require_once dirname( __FILE__ ) . '/CMB2/init.php';
 }
 require_once 'vendor/autoload.php';
-function slickPlugin()
+function tasaRemesasPlugin()
 {
-    return \giorgiosaud\slickwp\Initializers::getInstance();
+    return Initializers::getInstance();
 }
-$GLOBALS['tasaremesas'] = slickPlugin();
+$GLOBALS['tasaremesas'] = tasaRemesasPlugin();
+tasaR
