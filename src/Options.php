@@ -54,15 +54,15 @@ class Options
     public function createWebhookAdminPage()
     {
         // Set class property
-        $this->options = get_option('slick_wp_plugin_webhook');
+        $this->options = get_option('tasa_remesas_wp_plugin_webhook');
         ?>
         <div class="wrap">
             <h1>My Webhook Settings</h1>
             <form method="post" action="options.php">
                 <?php
                 // This prints out all hidden setting fields
-                settings_fields('slick_wp_plugin_webhhok_settings');
-                do_settings_sections('slick_wp_plugin_webhook');
+                settings_fields('tasa_remesas_wp_plugin_webhhok_settings');
+                do_settings_sections('tasa_remesas_wp_plugin_webhook');
                 submit_button();
                 ?>
             </form>
@@ -76,41 +76,41 @@ class Options
     public function pageInit()
     {
         register_setting(
-            'slick_wp_plugin_webhhok_settings', // Option group
-            'slick_wp_plugin_webhook', // Option name
+            'tasa_remesas_wp_plugin_webhhok_settings', // Option group
+            'tasa_remesas_wp_plugin_webhook', // Option name
             array( $this, 'sanitize' ) // Sanitize
         );
 
         add_settings_section(
-            'slick_wp_plugin_webhook_settings', // ID
+            'tasa_remesas_wp_plugin_webhook_settings', // ID
             'Giorgio Plugin My Webhook Settings', // Title
             array( $this, 'printSectionInfo' ), // Callback
-            'slick_wp_plugin_webhook' // Page
+            'tasa_remesas_wp_plugin_webhook' // Page
         );
         add_settings_field(
             'secret', //ID
             'Secret', //Title
             array( $this, 'webhookCallback' ), // callback
-            'slick_wp_plugin_webhook', //Page
-            'slick_wp_plugin_webhook_settings' //Section
+            'tasa_remesas_wp_plugin_webhook', //Page
+            'tasa_remesas_wp_plugin_webhook_settings' //Section
         );
         register_setting(
-            'slick_wp_plugin_general_settings', // Option group
-            'slick_wp_plugin_general', // Option name
+            'tasa_remesas_wp_plugin_general_settings', // Option group
+            'tasa_remesas_wp_plugin_general', // Option name
             array( $this, 'sanitize_general_settings' ) // Sanitize
         );
         add_settings_section(
-            'slick_wp_plugin_general_settings', // ID
+            'tasa_remesas_wp_plugin_general_settings', // ID
             'Slick Settings', // Title
             array( $this, 'printSectionSlick' ), // Callback
-            'slick_wp_plugin_general' // Page
+            'tasa_remesas_wp_plugin_general' // Page
         );
         add_settings_field(
             'custom_posts', //ID
-            __('Select Custom Post To Use','slick_wp_plugin'), //Title
+            __('Select Custom Post To Use','tasa_remesas_wp_plugin'), //Title
             array( $this, 'askForPosts' ), // callback
-            'slick_wp_plugin_general', //Page
-            'slick_wp_plugin_general_settings' //Section
+            'tasa_remesas_wp_plugin_general', //Page
+            'tasa_remesas_wp_plugin_general_settings' //Section
         );
     }
 
@@ -137,7 +137,7 @@ class Options
     public function webhookCallback()
     {
         printf(
-            '<input type="text" id="secret" name="slick_wp_plugin_webhook[secret]" value="%s" />',
+            '<input type="text" id="secret" name="tasa_remesas_wp_plugin_webhook[secret]" value="%s" />',
             isset($this->options['secret']) ? esc_attr($this->options['secret']) : ''
         );
     }
@@ -160,14 +160,14 @@ class Options
      */
     public function printSectionInfo()
     {
-        _e('Enter your Webhook Settings below:', 'slick_wp_plugin');
+        _e('Enter your Webhook Settings below:', 'tasa_remesas_wp_plugin');
     }
     /** 
      * Print the Section text
      */
     public function printSectionSlick()
     {
-        _e('Enter your Slick Settings below:', 'slick_wp_plugin');
+        _e('Enter your Slick Settings below:', 'tasa_remesas_wp_plugin');
     }
 
     
@@ -180,7 +180,7 @@ class Options
 
         $post_types = get_post_types( $args, $output, $operator ); 
 
-        echo '<select name="slick_wp_plugin_general[custom_posts][]" multiple="multiple">';
+        echo '<select name="tasa_remesas_wp_plugin_general[custom_posts][]" multiple="multiple">';
         foreach ( $post_types as $post_type ) {
             $selected=(in_array($post_type->name,$this->options['custom_posts']))?'selected':'';
             printf('<option value="%s" %s>%s</option>',$post_type->name,$selected,$post_type->name);
@@ -201,15 +201,15 @@ class Options
     public function createAdminPage()
     {
         // Set class property
-        $this->options = get_option('slick_wp_plugin_general');
+        $this->options = get_option('tasa_remesas_wp_plugin_general');
         ?>
         <div class="wrap">
             <h1>My Settings</h1>
             <form method="post" action="options.php">
                 <?php
                 // This prints out all hidden setting fields
-                settings_fields('slick_wp_plugin_general_settings');
-                do_settings_sections('slick_wp_plugin_general');
+                settings_fields('tasa_remesas_wp_plugin_general_settings');
+                do_settings_sections('tasa_remesas_wp_plugin_general');
                 submit_button();
                 ?>
             </form>
