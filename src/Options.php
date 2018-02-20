@@ -175,7 +175,7 @@ class Options
     {
         $new_input = array();
         if( isset( $input['tasa'] ) )
-            $new_input['tasa'] = $input['tasa']*100;
+            $new_input['tasa'] = absint( floatval($input['tasa'])*100);
         return $new_input;
     }
 
