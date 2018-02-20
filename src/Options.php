@@ -171,6 +171,7 @@ class Options
 
     public function tasa_actual()
     {
+        var_dump($this->options);
         printf(
             '<input type="number" id="tasa" name="tasa_remesas_wp_plugin_general[tasa]" value="%i" />',
             isset($this->options['tasa']) ? esc_attr($this->options['tasa']) : ''
