@@ -25,7 +25,7 @@ class tasaRemesasShortcode extends Singleton{
 	}
 	protected function prepareView(){
         $tasa=number_format($this->tasa/100,2,',','.');
-        $html="<h2 style='text-align: center;'>Tasa $tasa $/Bs</h2>";
+        $html="<h2 style='text-align: center;'>Tasa $tasa Bs/$</h2>";
         $tasa=number_format($this->tasa/100*20000,2,',','.');
         $html.="<p style='text-align: center;'>20.000$=$tasa Bs.</p>";
         $tasa=number_format($this->tasa/100*40000,2,',','.');
