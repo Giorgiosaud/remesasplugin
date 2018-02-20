@@ -1,4 +1,5 @@
 <?php
+
 namespace giorgiosaud\tasaRemesas;
 
 class Options
@@ -13,8 +14,8 @@ class Options
      */
     public function __construct()
     {
-        add_action('admin_menu', array( $this, 'addPluginPage'));
-        add_action('admin_init', array( $this, 'pageInit' ));
+        add_action('admin_menu', array($this, 'addPluginPage'));
+        add_action('admin_init', array($this, 'pageInit'));
     }
 
     /**
@@ -27,7 +28,7 @@ class Options
             'Tasa Remesas', // Menu Title
             'manage_options', //Capability
             'tasa_remesas_wp_plugin', // Menu Slug
-            array( $this, 'createAdminPage' ), // callable function,
+            array($this, 'createAdminPage'), // callable function,
             '',//Icon URL
             null //Position
         );
@@ -37,7 +38,7 @@ class Options
             'Slick Wp Main Settings', // Menu Title
             'manage_options', //capability
             'tasa_remesas_wp_plugin', // menu slug
-            array( $this, 'createAdminPage' ) // Callable
+            array($this, 'createAdminPage') // Callable
         );
         add_submenu_page(
             'tasa_remesas_wp_plugin', //Parent Slug
@@ -45,9 +46,10 @@ class Options
             'Remesas Wp Webhook Setup', // Menu Title
             'manage_options',//capability
             'tasa_remessas_wp_plugin_webhook',// menu slug
-            array( $this, 'createWebhookAdminPage' ) // Callable
+            array($this, 'createWebhookAdminPage') // Callable
         );
     }
+
     /**
      * Options page callback
      */
@@ -78,37 +80,37 @@ class Options
         register_setting(
             'tasa_remesas_wp_plugin_webhhok_settings', // Option group
             'tasa_remesas_wp_plugin_webhook', // Option name
-            array( $this, 'sanitize' ) // Sanitize
+            array($this, 'sanitize') // Sanitize
         );
 
         add_settings_section(
             'tasa_remesas_wp_plugin_webhook_settings', // ID
             'Giorgio Plugin My Webhook Settings', // Title
-            array( $this, 'printSectionInfo' ), // Callback
+            array($this, 'printSectionInfo'), // Callback
             'tasa_remesas_wp_plugin_webhook' // Page
         );
         add_settings_field(
             'secret', //ID
             'Secret', //Title
-            array( $this, 'webhookCallback' ), // callback
+            array($this, 'webhookCallback'), // callback
             'tasa_remesas_wp_plugin_webhook', //Page
             'tasa_remesas_wp_plugin_webhook_settings' //Section
         );
         register_setting(
             'tasa_remesas_wp_plugin_general_settings', // Option group
             'tasa_remesas_wp_plugin_general', // Option name
-            array( $this, 'sanitize_general_settings' ) // Sanitize
+            array($this, 'sanitize_general_settings') // Sanitize
         );
         add_settings_section(
             'tasa_remesas_wp_plugin_general_settings', // ID
             'Slick Settings', // Title
-            array( $this, 'printSectionSlick' ), // Callback
+            array($this, 'printSectionSlick'), // Callback
             'tasa_remesas_wp_plugin_general' // Page
         );
         add_settings_field(
-            'custom_posts', //ID
-            __('Select Custom Post To Use','tasa_remesas_wp_plugin'), //Title
-            array( $this, 'askForPosts' ), // callback
+            'tasa_del_dia', //ID
+            __('Ingrese la tasa Actual', 'tasa_remesas_wp_plugin'), //Title
+            array($this, 'tasa_actual'), // callback
             'tasa_remesas_wp_plugin_general', //Page
             'tasa_remesas_wp_plugin_general_settings' //Section
         );
@@ -133,7 +135,6 @@ class Options
     }
 
 
-
     public function webhookCallback()
     {
         printf(
@@ -143,26 +144,28 @@ class Options
     }
 
 
-    public function sanitize_general_settings($input){
+    public function sanitize_general_settings($input)
+    {
         $new_input = array();
         if (isset($input['custom_posts'])) {
-            $new_input['custom_posts']=array();
+            $new_input['custom_posts'] = array();
             foreach ($input['custom_posts'] as $custom_post) {
-                $sanitized=sanitize_text_field($custom_post);
+                $sanitized = sanitize_text_field($custom_post);
                 array_push($new_input['custom_posts'], $sanitized);
             }
         }
         return $new_input;
     }
 
-    /** 
+    /**
      * Print the Section text
      */
     public function printSectionInfo()
     {
         _e('Enter your Webhook Settings below:', 'tasa_remesas_wp_plugin');
     }
-    /** 
+
+    /**
      * Print the Section text
      */
     public function printSectionSlick()
@@ -170,31 +173,17 @@ class Options
         _e('Enter your Slick Settings below:', 'tasa_remesas_wp_plugin');
     }
 
-    
-    public function askForPosts(){
-        $args = array(
-            'public'   => true
-        );
-        $output = 'objects'; // names or objects, note names is the default
-        $operator = 'and'; // 'and' or 'or'
 
-        $post_types = get_post_types( $args, $output, $operator ); 
-
-        echo '<select name="tasa_remesas_wp_plugin_general[custom_posts][]" multiple="multiple">';
-        foreach ( $post_types as $post_type ) {
-            $selected=(in_array($post_type->name,$this->options['custom_posts']))?'selected':'';
-            printf('<option value="%s" %s>%s</option>',$post_type->name,$selected,$post_type->name);
-        }
-        echo '</select>';
-        foreach ($this->options['custom_posts'] as $custom_post) {
+    public function tasa_actual()
+    {
         printf(
-            '<div> %s </div>',
-            $custom_post
-        );    
-        }
-        
+            '<input type="number" id="tasa" name="tasa_remesas_wp_plugin_general[tasa]" value="%i" />',
+            isset($this->options['tasa']) ? esc_attr($this->options['tasa']) : ''
+        );
+
 
     }
+
     /**
      * Options page callback
      */
