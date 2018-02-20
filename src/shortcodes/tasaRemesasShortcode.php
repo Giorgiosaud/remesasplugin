@@ -24,7 +24,8 @@ class tasaRemesasShortcode extends Singleton{
 		return $this->view;
 	}
 	protected function prepareView(){
-        $html='<h2 style="text-align: center;">Tasa 350</h2>';
+        $tasa=$this->tasa;
+        $html="<h2 style='text-align: center;'>Tasa $tasa</h2>";
         $html.='<p style="text-align: center;">20.000$=123bs</p>';
         $html.='<p style="text-align: center;">40.000$=123bs</p>';
         $html.='<p style="text-align: center;">50.000$=123bs</p>';
