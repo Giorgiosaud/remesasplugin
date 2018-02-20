@@ -1,0 +1,15 @@
+{
+    "name": "giorgiosaud/tasaRemesas",
+    "authors": [
+        {
+            "name": "Jorge Saud",
+            "email": "jorgelsaud@gmail.com"
+        }
+    ],
+    "autoload":{
+    	"psr-4":{
+    		"giorgiosaud\\tasaRemesas\\":"src/"
+    	}
+    },
+    "require": {}
+}
