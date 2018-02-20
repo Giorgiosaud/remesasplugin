@@ -147,13 +147,8 @@ class Options
     public function sanitize_general_settings($input)
     {
         $new_input = array();
-        if (isset($input['custom_posts'])) {
-            $new_input['custom_posts'] = array();
-            foreach ($input['custom_posts'] as $custom_post) {
-                $sanitized = sanitize_text_field($custom_post);
-                array_push($new_input['custom_posts'], $sanitized);
-            }
-        }
+        if( isset( $input['tasa'] ) )
+            $new_input['tasa'] = absint( $input['tasa'] );
         return $new_input;
     }
 
