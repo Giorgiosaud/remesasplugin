@@ -24,8 +24,9 @@ class tasaRemesasShortcode extends Singleton{
 		return $this->view;
 	}
 	protected function prepareView(){
+        $html='<div class="tasaDelDia">';
         $tasa=number_format($this->tasa/100,2,',','.');
-        $html="<h2 style='text-align: center;'>Tasa $tasa Bs/$</h2>";
+        $html.="<h2 style='text-align: center;'>Tasa $tasa Bs/$</h2>";
         $tasa=number_format($this->tasa/100*10000,2,',','.');
         $html.="<p style='text-align: center;'>10.000$=$tasa Bs.</p>";
         $tasa=number_format($this->tasa/100*20000,2,',','.');
@@ -40,6 +41,7 @@ class tasaRemesasShortcode extends Singleton{
         $html.="<p style='text-align: center;'>500.000$=$tasa Bs.</p>";
         $tasa=number_format($this->tasa/100*1000000,2,',','.');
         $html.="<p style='text-align: center;'>1.000.000$=$tasa Bs.</p>";
+        $html.="</div>";
 
         $this->view=$html;
 	}
