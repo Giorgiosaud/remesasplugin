@@ -28,8 +28,8 @@ class fechaShortcode extends Singleton
     }
     protected function prepareView()
     {
-        $html='<div class="Fecha">';
-        $html.=date('m/d/Y h:i:s a', time());
+        $html='<div class="Fecha" style="text-align:center">';
+        $html.=date('d/m/Y', time());
         $html.="</div>";
 
         $this->view=$html;
