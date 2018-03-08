@@ -1,13 +1,13 @@
 <?php
 namespace giorgiosaud\tasaRemesas;
 
-
 use giorgiosaud\tasaRemesas\shortcodes\tasaRemesasShortcode;
+use giorgiosaud\tasaRemesas\shortcodes\fechaShortcode;
 
 class Initializers extends Singleton
 {
-	public $version="1.0";
-	/**
+    public $version="1.0";
+    /**
      * Define constant if not already set.
      *
      * @param string      $name  Constant name.
@@ -19,31 +19,31 @@ class Initializers extends Singleton
             define($name, $value);
         }
     }
-	public function __construct()
-	{
-
-		$this->defineConstants();
+    public function __construct()
+    {
+        $this->defineConstants();
         
-		$this->initHooks();
-		if (is_admin()) {
-			$my_settings_page = new Options();
-		}
-		do_action('giorgioremesasplugin_loaded');
-	}
-	private function defineConstants()
-	{
-		$upload_dir = wp_upload_dir(null, false);
-		$this->define('TASAREMESAS_ABSPATH', dirname(TASAREMESAS_FILE) . '/');
-		$this->define('TASAREMESAS_BASENAME', plugin_basename(TASAREMESAS_FILE));
-		$this->define('TASAREMESAS_VERSION', $this->version);
-        $this->define('TASAREMESAS_CMB2PREFIX','SLICKWP_');
-	}
+        $this->initHooks();
+        if (is_admin()) {
+            $my_settings_page = new Options();
+        }
+        do_action('giorgioremesasplugin_loaded');
+    }
+    private function defineConstants()
+    {
+        $upload_dir = wp_upload_dir(null, false);
+        $this->define('TASAREMESAS_ABSPATH', dirname(TASAREMESAS_FILE) . '/');
+        $this->define('TASAREMESAS_BASENAME', plugin_basename(TASAREMESAS_FILE));
+        $this->define('TASAREMESAS_VERSION', $this->version);
+        $this->define('TASAREMESAS_CMB2PREFIX', 'SLICKWP_');
+    }
     /**
      * Initialize Hooks
      */
     private function initHooks()
-    {	
-    	tasaRemesasShortcode::getInstance();
-    	StylesAndScripts::getInstance();
+    {
+        tasaRemesasShortcode::getInstance();
+        fechaShortcode::getInstance();
+        StylesAndScripts::getInstance();
     }
 }
