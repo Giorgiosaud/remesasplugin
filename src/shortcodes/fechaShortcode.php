@@ -36,7 +36,7 @@ class fechaShortcode extends Singleton
     protected function prepareView()
     {
         $html='<div class="Fecha" style="text-align:center">';
-        $html .='Hoy ';
+        // $html .='Hoy ';
         $html.=date('d/m/Y', $this->fecha);
         $html.="</div>";
 
