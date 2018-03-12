@@ -56,17 +56,15 @@ class Options
     public function createWebhookAdminPage()
     {
         // Set class property
-        $this->options = get_option('tasa_remesas_wp_plugin_webhook');
-        ?>
+        $this->options = get_option('tasa_remesas_wp_plugin_webhook'); ?>
         <div class="wrap">
             <h1>My Webhook Settings</h1>
             <form method="post" action="options.php">
                 <?php
                 // This prints out all hidden setting fields
                 settings_fields('tasa_remesas_wp_plugin_webhhok_settings');
-                do_settings_sections('tasa_remesas_wp_plugin_webhook');
-                submit_button();
-                ?>
+        do_settings_sections('tasa_remesas_wp_plugin_webhook');
+        submit_button(); ?>
             </form>
         </div>
         <?php
@@ -111,6 +109,13 @@ class Options
             'tasa_del_dia', //ID
             __('Ingrese la tasa Actual', 'tasa_remesas_wp_plugin'), //Title
             array($this, 'tasa_actual'), // callback
+            'tasa_remesas_wp_plugin_general', //Page
+            'tasa_remesas_wp_plugin_general_settings' //Section
+        );
+        add_settings_field(
+            'fecha_tasa_del_dia', //ID
+            __('Ingrese la fecha de la tasa Actual', 'tasa_remesas_wp_plugin'), //Title
+            array($this, 'fecha_tasa'), // callback
             'tasa_remesas_wp_plugin_general', //Page
             'tasa_remesas_wp_plugin_general_settings' //Section
         );
@@ -170,11 +175,22 @@ class Options
             isset($this->options['tasa']) ? esc_attr($this->options['tasa'])/100 : ''
         );
     }
+    public function fecha_tasa()
+    {
+        printf(
+            '<input type="date" id="fecha_tasa" name="tasa_remesas_wp_plugin_general[fecha_tasa]" value="%s" />',
+            isset($this->options['fecha_tasa']) ? esc_attr($this->options['fecha_tasa'])/100 : ''
+        );
+    }
     public function sanitize_general_settings($input)
     {
         $new_input = array();
-        if( isset( $input['tasa'] ) )
-            $new_input['tasa'] = absint( floatval($input['tasa'])*100);
+        if (isset($input['tasa'])) {
+            $new_input['tasa'] = absint(floatval($input['tasa'])*100);
+        }
+        if (isset($input['fecha_tasa'])) {
+            $new_input['fecha_tasa'] = $input['tasa'];
+        }
         return $new_input;
     }
 
@@ -184,17 +200,15 @@ class Options
     public function createAdminPage()
     {
         // Set class property
-        $this->options = get_option('tasa_remesas_wp_plugin_general');
-        ?>
+        $this->options = get_option('tasa_remesas_wp_plugin_general'); ?>
         <div class="wrap">
             <h1>My Settings</h1>
             <form method="post" action="options.php">
                 <?php
                 // This prints out all hidden setting fields
                 settings_fields('tasa_remesas_wp_plugin_general_settings');
-                do_settings_sections('tasa_remesas_wp_plugin_general');
-                submit_button();
-                ?>
+        do_settings_sections('tasa_remesas_wp_plugin_general');
+        submit_button(); ?>
             </form>
         </div>
         <?php
