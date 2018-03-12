@@ -179,7 +179,7 @@ class Options
     {
         printf(
             '<input type="date" id="fecha_tasa" name="tasa_remesas_wp_plugin_general[fecha_tasa]" value="%s" />',
-            isset($this->options['fecha_tasa']) ? esc_attr($this->options['fecha_tasa'])/100 : ''
+            isset($this->options['fecha_tasa']) ? esc_attr($this->options['fecha_tasa']) : ''
         );
     }
     public function sanitize_general_settings($input)
