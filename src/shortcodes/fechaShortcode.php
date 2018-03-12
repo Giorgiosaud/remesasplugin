@@ -26,7 +26,7 @@ class fechaShortcode extends Singleton
         );
         $options=get_option('tasa_remesas_wp_plugin_general');
         $this->fecha=date_create($options['fecha_tasa']);
-
+        die(var_dump($this->fecha));
         $this->prepareView();
         return $this->view;
 
@@ -35,7 +35,6 @@ class fechaShortcode extends Singleton
     }
     protected function prepareView()
     {
-        echo $this->fecha;
         $html='<div class="Fecha" style="text-align:center">';
         // $html .='Hoy ';
         $html.=date('d/m/Y', $this->fecha);
