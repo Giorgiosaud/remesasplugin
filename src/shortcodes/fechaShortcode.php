@@ -37,11 +37,11 @@ class fechaShortcode extends Singleton
         $html='<div class="Fecha" style="text-align:center">';
         // $html .='Hoy ';
         
-        // $formato = 'Y-m-d';
+        $formato = 'Y-m-d';
         
-        // $fecha=DateTime::createFromFormat($formato, $this->fecha);
+        $fecha=DateTime::createFromFormat($formato, $this->fecha);
         
-        $html.=$this->fecha;
+        $html.=$fecha;
         $html.="</div>";
         
         $this->view=$html;
