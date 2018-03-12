@@ -9,6 +9,7 @@ use giorgiosaud\tasaRemesas\Singleton;
 class fechaShortcode extends Singleton
 {
     protected $view;
+    protected $fecha;
 
     public function __construct()
     {
@@ -23,6 +24,12 @@ class fechaShortcode extends Singleton
             $atts,
             'remesas2017'
         );
+        $options=get_option('tasa_remesas_wp_plugin_general');
+        $this->fecha=date_create($options['fecha_tasa']);
+
+        $this->prepareView();
+        return $this->view;
+
         $this->prepareView();
         return $this->view;
     }
@@ -30,7 +37,7 @@ class fechaShortcode extends Singleton
     {
         $html='<div class="Fecha" style="text-align:center">';
         $html .='Hoy ';
-        $html.=date('d/m/Y', time());
+        $html.=date('d/m/Y', $this->fecha);
         $html.="</div>";
 
         $this->view=$html;
