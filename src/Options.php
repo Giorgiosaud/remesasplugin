@@ -189,7 +189,7 @@ class Options
             $new_input['tasa'] = absint(floatval($input['tasa'])*100);
         }
         if (isset($input['fecha_tasa'])) {
-            $new_input['fecha_tasa'] = $input['tasa'];
+            $new_input['fecha_tasa'] = $input['fecha_tasa'];
         }
         return $new_input;
     }
