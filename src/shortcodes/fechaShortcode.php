@@ -25,7 +25,7 @@ class fechaShortcode extends Singleton
             'remesas2017'
         );
         $options=get_option('tasa_remesas_wp_plugin_general');
-        $this->fecha=date_create($options['fecha_tasa']);
+        $this->fecha=date('Y-m-d', $options['fecha_tasa']);
         die(var_dump($this->fecha));
         $this->prepareView();
         return $this->view;
