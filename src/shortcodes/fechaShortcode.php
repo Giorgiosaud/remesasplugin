@@ -4,13 +4,13 @@ namespace giorgiosaud\tasaRemesas\shortcodes;
 use giorgiosaud\tasaRemesas\Singleton;
 
 /**
- * @property  tasa
- */
+* @property  tasa
+*/
 class fechaShortcode extends Singleton
 {
     protected $view;
     protected $fecha;
-
+    
     public function __construct()
     {
         add_shortcode('fechaRemesas', array($this,'execute'));
@@ -28,7 +28,7 @@ class fechaShortcode extends Singleton
         $this->fecha=$options['fecha_tasa'];
         $this->prepareView();
         return $this->view;
-
+        
         $this->prepareView();
         return $this->view;
     }
@@ -36,9 +36,14 @@ class fechaShortcode extends Singleton
     {
         $html='<div class="Fecha" style="text-align:center">';
         // $html .='Hoy ';
-        $html.=date('d/m/Y', $this->fecha);
+        
+        $formato = 'Y-m-d';
+        
+        $fecha=DateTime::createFromFormat($formato, $this->fecha);
+        
+        $html.=date('d/m/Y', $fecha);
         $html.="</div>";
-
+        
         $this->view=$html;
     }
 }
