@@ -41,7 +41,8 @@ class fechaShortcode extends Singleton
         
         $fecha=\DateTime::createFromFormat($formato, $this->fecha);
         
-        $html.=$this->fecha;
+        $html.=date_format($this->fecha, "d/m/Y");
+        ;
         $html.="</div>";
         
         $this->view=$html;
