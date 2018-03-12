@@ -39,7 +39,7 @@ class fechaShortcode extends Singleton
         
         $formato = 'Y-m-d';
         
-        $fecha=DateTime::createFromFormat($formato, $this->fecha);
+        $fecha=\DateTime::createFromFormat($formato, $this->fecha);
         
         $html.=$this->fecha;
         $html.="</div>";
