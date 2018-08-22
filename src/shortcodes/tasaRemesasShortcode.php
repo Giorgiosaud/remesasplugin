@@ -33,21 +33,21 @@ class tasaRemesasShortcode extends Singleton
     {
         $html='<div class="tasaDelDia">';
         $tasa=number_format($this->tasa/10000, 4, ',', '.');
-        $html.="<h2 style='text-align: center;'>Tasa $tasa Bs/Clp</h2>";
+        $html.="<h2 style='text-align: center;'>Tasa $tasa BsS./Clp</h2>";
       //  $tasa=number_format($this->tasa/10000*10000, 2, ',', '.');
       //  $html.="<p style='text-align: center;'>10.000$=$tasa Bs.</p>";
         $tasa=number_format($this->tasa/10000*20000, 2, ',', '.');
-        $html.="<p style='text-align: center;'>20.000$=$tasa Bs.</p>";
+        $html.="<p style='text-align: center;'>20.000$=$tasa BsS.</p>";
         $tasa=number_format($this->tasa/10000*40000, 2, ',', '.');
-        $html.="<p style='text-align: center;'>40.000$=$tasa Bs.</p>";
+        $html.="<p style='text-align: center;'>40.000$=$tasa BsS.</p>";
         $tasa=number_format($this->tasa/10000*50000, 2, ',', '.');
-        $html.="<p style='text-align: center;'>50.000$=$tasa Bs.</p>";
+        $html.="<p style='text-align: center;'>50.000$=$tasa BsS.</p>";
         $tasa=number_format($this->tasa/10000*100000, 2, ',', '.');
-        $html.="<p style='text-align: center;'>100.000$=$tasa Bs.</p>";
+        $html.="<p style='text-align: center;'>100.000$=$tasa BsS.</p>";
         $tasa=number_format($this->tasa/10000*500000, 2, ',', '.');
-        $html.="<p style='text-align: center;'>500.000$=$tasa Bs.</p>";
+        $html.="<p style='text-align: center;'>500.000$=$tasa BsS.</p>";
         $tasa=number_format($this->tasa/10000*1000000, 2, ',', '.');
-        $html.="<p style='text-align: center;'>1.000.000$=$tasa Bs.</p>";
+        $html.="<p style='text-align: center;'>1.000.000$=$tasa BsS.</p>";
         $html.="</div>";
 
         $this->view=$html;
