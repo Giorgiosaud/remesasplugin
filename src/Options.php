@@ -107,7 +107,7 @@ class Options
         );
         add_settings_field(
             'tasa_del_dia', //ID
-            __('Ingrese la tasa Actual', 'tasa_remesas_wp_plugin'), //Title
+            __('Ingrese la Tasa Actual', 'tasa_remesas_wp_plugin'), //Title
             array($this, 'tasa_actual'), // callback
             'tasa_remesas_wp_plugin_general', //Page
             'tasa_remesas_wp_plugin_general_settings' //Section
@@ -172,7 +172,7 @@ class Options
     {
         printf(
             '<input type="text" id="tasa" name="tasa_remesas_wp_plugin_general[tasa]" value="%s" />',
-            isset($this->options['tasa']) ? esc_attr($this->options['tasa'])/100 : ''
+            isset($this->options['tasa']) ? esc_attr($this->options['tasa'])/10000 : ''
         );
     }
     public function fecha_tasa()
@@ -186,7 +186,7 @@ class Options
     {
         $new_input = array();
         if (isset($input['tasa'])) {
-            $new_input['tasa'] = absint(floatval($input['tasa'])*100);
+            $new_input['tasa'] = absint(floatval($input['tasa'])*10000);
         }
         if (isset($input['fecha_tasa'])) {
             $new_input['fecha_tasa'] = $input['fecha_tasa'];
